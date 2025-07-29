@@ -1,0 +1,79 @@
+# Build results
+bin/
+obj/
+
+# Visual Studio files
+.vs/
+.vscode/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Mac specific files
+.DS_Store
+
+# Rider files
+.idea/
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+
+# Resharper files
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Dotnet publish output
+publish/
+
+# Xamarin/MAUI generated files
+*.apk
+*.apks
+*.aab
+*.dll
+*.exe
+*.pdb
+*.mdb
+*.so
+*.dylib
+*.app
+*.ipa
+
+# iOS specific
+*.xcodeproj/
+*.xcworkspace/
+*.xcuserstate
+*.xcuserdata/
+
+# Android specific
+*.gradle/
+.gradle/
+local.properties
+*.keystore
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Rider caches
+.idea/
+.idea_modules/
+
+# JetBrains Rider project files
+*.sln.iml
+
+# MAUI specific
+.maui/
+
+# Others
+*.lock.json
+*.db
+
+# User secrets
+secrets.json

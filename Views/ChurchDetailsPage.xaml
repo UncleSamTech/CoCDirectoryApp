@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage  
+   xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+   xmlns:local="clr-namespace:CoCDirectoryApp.Models"  
+   x:Class="CoCDirectoryApp.Views.ChurchDetailsPage" 
+   Title="Church Details ">
+
+    <CollectionView x:Name="ChurchCollectionView"  
+                   ItemsSource="{Binding Churches}"  
+                   SelectionMode="None"  
+                   Margin="10">  
+       <CollectionView.ItemTemplate>  
+           <DataTemplate x:DataType="local:ChurchInfo">  
+
+               <!-- Outer Card -->  
+               <Border Stroke="Gray" StrokeThickness="1" Padding="10" Margin="5"  
+                       StrokeShape="RoundRectangle 10" BackgroundColor="White">  
+
+                   <VerticalStackLayout Spacing="8">  
+
+                       <!-- Church Image -->  
+                       <Image Source="{Binding BuildingImage}"  
+                              Aspect="AspectFill"  
+                              HeightRequest="160"  
+                              HorizontalOptions="Fill" />  
+
+                       <!-- Church Info -->  
+                       <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="20" />  
+                       <Label Text="{Binding Address}" FontSize="14" TextColor="Gray" />  
+                       <Label Text="{Binding Phone}" FontSize="14" TextColor="Gray" />  
+
+                       <!-- Expand/Collapse Button -->  
+                       <Button Text="Show Activities"  
+                               Clicked="OnToggleActivitiesClicked"  
+                               CommandParameter="{Binding}"   
+                               FontSize="14"  
+                               Padding="5"  
+                               BackgroundColor="#e0e0e0"  
+                               CornerRadius="5"  
+                               />  
+
+                       <!-- Collapsible Order of Activities -->  
+                       <Label x:Name="ActivitiesLabel"  
+                              Text="{Binding Activities}"  
+                              FontSize="13"  
+                              LineBreakMode="WordWrap"  
+                              IsVisible="{Binding ShowActivities}" />  
+
+                   </VerticalStackLayout>  
+               </Border>  
+
+           </DataTemplate>  
+       </CollectionView.ItemTemplate>  
+   </CollectionView>  
+
+</ContentPage>

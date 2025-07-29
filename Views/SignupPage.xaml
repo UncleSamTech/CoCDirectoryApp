@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="CoCDirectoryApp.Views.SignupPage"
+    Title="SignUp">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,30,Auto,Auto,Auto"
+          ColumnDefinitions="Auto,*"
+          Padding="20"
+          VerticalOptions="Center">
+
+        <!-- Row 0: Logo + Login Label -->
+        <Image Grid.Row="0" Grid.Column="0" Source="logo.png" WidthRequest="40" HeightRequest="40" VerticalOptions="Center" />
+        <Label Grid.Row="0" Grid.Column="1" Text="Signup Page" FontAttributes="Bold" FontSize="24" VerticalOptions="Center" HorizontalOptions="Start" />
+
+        <!-- Row 1: Username Entry (centered across two columns) -->
+        <Entry Grid.Row="1" Grid.ColumnSpan="2" Placeholder="Choose your Username (Email or PhoneNumber)" HorizontalOptions="Fill" Margin="0,20,0,0" />
+
+        <Entry x:Name="PasswordEntry"
+       Grid.Row="2"
+       Grid.ColumnSpan="2"
+       Placeholder="Choose Password"
+       IsPassword="True"
+       HorizontalOptions="Fill"
+       Margin="0,20,0,0"
+       TextChanged="OnPasswordTextChanged" />
+
+        <!-- Row 3: Validation message -->
+        <Label x:Name="PasswordValidationLabel"
+       Grid.Row="3"
+       Grid.ColumnSpan="2"
+       TextColor="Red"
+       FontSize="12"
+       Margin="0,5,0,0"
+       IsVisible="False" />
+
+        <!-- Row 3: Spacer -->
+        <!-- Empty row for spacing -->
+
+        <!-- Row 4: 'Or login with' label -->
+        <Label Grid.Row="5" Grid.ColumnSpan="2" Text="or Login with" HorizontalOptions="Center" Margin="0,10,0,10" />
+
+        <!-- Row 5: Social Login (simulate with labels for now) -->
+        <StackLayout Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20">
+            <ImageButton Source="facebook.png"
+                 WidthRequest="40" HeightRequest="40"
+                 Clicked="OnFacebookSignUpClicked"
+                 BackgroundColor="Transparent" />
+
+            <ImageButton Source="google.png"
+                 WidthRequest="40" HeightRequest="40"
+                 Clicked="OnGoogleSignUpClicked"
+                 BackgroundColor="Transparent" />
+
+            <ImageButton Source="twitter.png"
+                 WidthRequest="40" HeightRequest="40"
+                 Clicked="OnTwitterSignUpClicked"
+                 BackgroundColor="Transparent" />
+        </StackLayout>
+
+
+        <!-- Row 6: Signup Button -->
+        <Button Grid.Row="7" Grid.ColumnSpan="2" Text="Sign Up" Margin="0,20,0,0" HorizontalOptions="Fill" />
+
+    </Grid>
+</ContentPage>
