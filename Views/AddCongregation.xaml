@@ -2,25 +2,35 @@
 <ContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
     x:Class="CoCDirectoryApp.Views.AddCongregation"
     Title="Add New Church">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="16">
 
-            <Label Text="Church Name" />
+            <Label Text="Congregation Name" />
             <Entry x:Name="NameEntry" Placeholder="Enter name" />
 
             <Label Text="Phone Number" />
             <Entry x:Name="PhoneEntry" Placeholder="Enter phone number" Keyboard="Telephone" />
-            <Entry x:Name="AddressEntry" Placeholder="Tap button to select address" IsReadOnly="True" />
 
-            <!-- Button to pick from map -->
-            <Button Text="📍 Pick Location"
+            <Entry x:Name="AddressEntry" 
+                   Placeholder="Tap button or map to select address" 
+                   IsReadOnly="True" />
+
+            <!-- Button to pick from GPS -->
+            <Button Text="📍 Use Current Location"
                     Clicked="OnPickLocationClicked"
                     BackgroundColor="DodgerBlue"
                     TextColor="White" />
-            
+
+            <!-- Map for user to pick location -->
+            <maps:Map x:Name="LocationMap"
+                      HeightRequest="300"
+                      Margin="0,10,0,10"
+                      MapClicked="OnMapClicked" />
+
             <Label Text="Add Activity" />
             <HorizontalStackLayout>
                 <Entry x:Name="NewActivityEntry" Placeholder="e.g. Bible Study" />
@@ -35,7 +45,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Button Text="Save Church"
+            <Button Text="Save Congregation"
                     BackgroundColor="DarkGreen"
                     TextColor="White"
                     Clicked="OnSaveClicked" />

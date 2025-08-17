@@ -1,5 +1,7 @@
 using CoCDirectoryApp.Models;
+using Microsoft.Maui.Controls.Maps;
 using System.Collections.ObjectModel;
+using Microsoft.Maui.Maps;
 
 namespace CoCDirectoryApp.Views;
 
@@ -61,18 +63,20 @@ public partial class AddCongregation : ContentPage
 
             if (location != null)
             {
-                // Reverse geocode to human-readable address
-                var placemarks = await Geocoding.Default.GetPlacemarksAsync(location);
-                var placemark = placemarks?.FirstOrDefault();
+                await UpdateAddressFromLocation(location);
 
-                if (placemark != null)
+                // Center map at current location
+                LocationMap.MoveToRegion(MapSpan.FromCenterAndRadius(
+                    new Location(location.Latitude, location.Longitude),
+                    Distance.FromKilometers(1)));
+
+                // Drop a pin
+                LocationMap.Pins.Clear();
+                LocationMap.Pins.Add(new Pin
                 {
-                    AddressEntry.Text = $"{placemark.Thoroughfare} {placemark.Locality}, {placemark.CountryName}";
-                }
-
-                // Open native maps app for user refinement
-                var options = new MapLaunchOptions { Name = "Select church location" };
-                await Map.OpenAsync(location, options);
+                    Label = "Selected Location",
+                    Location = new Location(location.Latitude, location.Longitude)
+                });
             }
         }
         catch (Exception ex)
@@ -81,5 +85,43 @@ public partial class AddCongregation : ContentPage
         }
     }
 
+    public async void OnMapClicked(object sender, MapClickedEventArgs e)
+    {
+        var clickedLocation = e.Location;
+
+        // Drop pin where user clicked
+        LocationMap.Pins.Clear();
+        LocationMap.Pins.Add(new Pin
+        {
+            Label = "Selected Location",
+            Location = clickedLocation
+        });
+
+        // Reverse geocode and update address
+        await UpdateAddressFromLocation(clickedLocation);
+    }
+    private async Task UpdateAddressFromLocation(Location location)
+    {
+        var placemarks = await Geocoding.Default.GetPlacemarksAsync(location);
+        var placemark = placemarks?.FirstOrDefault();
+
+        if (placemark != null)
+        {
+            AddressEntry.Text = $"{placemark.Thoroughfare} {placemark.Locality}, {placemark.CountryName}";
+        }
+        else
+        {
+            AddressEntry.Text = $"{location.Latitude}, {location.Longitude}";
+        }
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+#if WINDOWS
+        DisplayAlert("Notice", "Map control is not supported on Windows.", "OK");
+#endif
+    }
 
 }
