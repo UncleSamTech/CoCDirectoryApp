@@ -3,65 +3,57 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     x:Class="CoCDirectoryApp.Views.SignupPage"
-    Title="SignUp">
+    >
 
-    <Grid RowDefinitions="Auto,Auto,Auto,30,Auto,Auto,Auto"
-          ColumnDefinitions="Auto,*"
-          Padding="20"
-          VerticalOptions="Center">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="Fill">
 
-        <!-- Row 0: Logo + Login Label -->
-        <Image Grid.Row="0" Grid.Column="0" Source="logo.png" WidthRequest="40" HeightRequest="40" VerticalOptions="Center" />
-        <Label Grid.Row="0" Grid.Column="1" Text="Signup Page" FontAttributes="Bold" FontSize="24" VerticalOptions="Center" HorizontalOptions="Start" />
+            <!-- Logo and Title -->
+            <Image Source="loggo.png" WidthRequest="80" HeightRequest="80" HorizontalOptions="Center" />
+            <Label Text="Signup Page" FontAttributes="Bold" FontSize="28" HorizontalOptions="Center" />
 
-        <!-- Row 1: Username Entry (centered across two columns) -->
-        <Entry Grid.Row="1" Grid.ColumnSpan="2" Placeholder="Choose your Username (Email or PhoneNumber)" HorizontalOptions="Fill" Margin="0,20,0,0" />
+            <!-- Username Entry -->
+            <Entry x:Name="UsernameEntry" Placeholder="Choose your Username (Email or PhoneNumber)" />
 
-        <Entry x:Name="PasswordEntry"
-       Grid.Row="2"
-       Grid.ColumnSpan="2"
-       Placeholder="Choose Password"
-       IsPassword="True"
-       HorizontalOptions="Fill"
-       Margin="0,20,0,0"
-       TextChanged="OnPasswordTextChanged" />
+            <!-- Password Entry -->
+            <Entry x:Name="PasswordEntry"
+                   Placeholder="Choose Password"
+                   IsPassword="True"
+                   TextChanged="OnPasswordTextChanged" />
 
-        <!-- Row 3: Validation message -->
-        <Label x:Name="PasswordValidationLabel"
-       Grid.Row="3"
-       Grid.ColumnSpan="2"
-       TextColor="Red"
-       FontSize="12"
-       Margin="0,5,0,0"
-       IsVisible="False" />
+            <!-- Password Validation Label -->
+            <Label x:Name="PasswordValidationLabel"
+                   TextColor="{DynamicResource Red}"
+                   FontSize="12"
+                   IsVisible="False" />
 
-        <!-- Row 3: Spacer -->
-        <!-- Empty row for spacing -->
+            <!-- Sign Up Button -->
+            <Button Text="Sign Up" Clicked="OnSignUpClicked" />
 
-        <!-- Row 4: 'Or login with' label -->
-        <Label Grid.Row="5" Grid.ColumnSpan="2" Text="or Login with" HorizontalOptions="Center" Margin="0,10,0,10" />
+            <!-- Or Login with -->
+            <Label Text="or Sign up with" HorizontalOptions="Center" />
 
-        <!-- Row 5: Social Login (simulate with labels for now) -->
-        <StackLayout Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20">
-            <ImageButton Source="facebook.png"
-                 WidthRequest="40" HeightRequest="40"
-                 Clicked="OnFacebookSignUpClicked"
-                 BackgroundColor="Transparent" />
+            <!-- Social Login Buttons -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
+                <ImageButton Source="facebook.png"
+                             WidthRequest="40" HeightRequest="40"
+                             Clicked="OnFacebookSignUpClicked"
+                             BackgroundColor="{DynamicResource Transparent}" />
 
-            <ImageButton Source="google.png"
-                 WidthRequest="40" HeightRequest="40"
-                 Clicked="OnGoogleSignUpClicked"
-                 BackgroundColor="Transparent" />
+                <ImageButton Source="google.png"
+                             WidthRequest="40" HeightRequest="40"
+                             Clicked="OnGoogleSignUpClicked"
+                             BackgroundColor="{DynamicResource Transparent}" />
 
-            <ImageButton Source="twitter.png"
-                 WidthRequest="40" HeightRequest="40"
-                 Clicked="OnTwitterSignUpClicked"
-                 BackgroundColor="Transparent" />
-        </StackLayout>
+                <ImageButton Source="twitter.png"
+                             WidthRequest="40" HeightRequest="40"
+                             Clicked="OnTwitterSignUpClicked"
+                             BackgroundColor="{DynamicResource Transparent}" />
+            </HorizontalStackLayout>
 
+            <!-- Login Navigation -->
+            <Button Text="Login" Clicked="OnReturnLogin" />
 
-        <!-- Row 6: Signup Button -->
-        <Button Grid.Row="7" Grid.ColumnSpan="2" Text="Sign Up" Margin="0,20,0,0" HorizontalOptions="Fill" />
-
-    </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

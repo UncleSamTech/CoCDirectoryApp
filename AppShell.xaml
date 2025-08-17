@@ -1,23 +1,56 @@
 <Shell
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:root="clr-namespace:CoCDirectoryApp"
     xmlns:views="clr-namespace:CoCDirectoryApp.Views"
     x:Class="CoCDirectoryApp.AppShell">
 
-    <ShellContent
-        Title="Main"
-        Route="MainPage"
-        ContentTemplate="{DataTemplate root:MainPage}" />
-
-    <ShellContent
-        Title="Splash"
+    <!-- Flyout Menu Items -->
+    <FlyoutItem Title="Splash" FlyoutItemIsVisible="False">
+        <ShellContent
         Route="SplashPage"
         ContentTemplate="{DataTemplate views:SplashPage}" />
+    </FlyoutItem>
 
-    <ShellContent
-        Title="Login"
+
+    <!-- Home -->
+    <FlyoutItem Title="Home" Icon="home.svg">
+        <ShellContent
+            Route="StateListPage"
+            ContentTemplate="{DataTemplate views:StateListPage}" />
+    </FlyoutItem>
+
+    <!-- About -->
+    <FlyoutItem Title="About" Icon="about.svg">
+        <ShellContent
+            Route="AboutPage"
+            ContentTemplate="{DataTemplate views:AboutPage}" />
+    </FlyoutItem>
+
+    <!-- Blog -->
+    <FlyoutItem Title="Blog" Icon="blog.svg">
+        <ShellContent
+            Route="BlogPage"
+            ContentTemplate="{DataTemplate views:BlogPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Login" FlyoutItemIsVisible="False">
+        <ShellContent
         Route="LoginPage"
         ContentTemplate="{DataTemplate views:LoginPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Login" FlyoutItemIsVisible="False">
+        <ShellContent
+        Route="SignupPage"
+        ContentTemplate="{DataTemplate views:SignupPage}" />
+    </FlyoutItem>
+
+
+    <!-- Logout -->
+    <MenuItem
+        Text="Logout"
+        IconImageSource="logout.svg"
+        Clicked="OnLogoutClicked"
+        IsDestructive="True" />
 
 </Shell>

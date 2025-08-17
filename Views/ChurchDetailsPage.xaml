@@ -1,57 +1,80 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage  
-   xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
-   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
-   xmlns:local="clr-namespace:CoCDirectoryApp.Models"  
-   x:Class="CoCDirectoryApp.Views.ChurchDetailsPage" 
-   Title="Church Details ">
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CoCDirectoryApp.Views"
+    x:Class="CoCDirectoryApp.Views.ChurchDetailsPage"
+    x:Name="ChurchDetailsPageRef"
+    Title="Church Details"
+    BackgroundColor="#f2f2f2">
 
-    <CollectionView x:Name="ChurchCollectionView"  
-                   ItemsSource="{Binding Churches}"  
-                   SelectionMode="None"  
-                   Margin="10">  
-       <CollectionView.ItemTemplate>  
-           <DataTemplate x:DataType="local:ChurchInfo">  
+    <ScrollView>
+        <VerticalStackLayout Padding="0" Spacing="0"
+                             BindableLayout.ItemsSource="{Binding Churches}">
 
-               <!-- Outer Card -->  
-               <Border Stroke="Gray" StrokeThickness="1" Padding="10" Margin="5"  
-                       StrokeShape="RoundRectangle 10" BackgroundColor="White">  
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout Spacing="1">
 
-                   <VerticalStackLayout Spacing="8">  
+                        <!-- Church Image -->
+                        <Image Source="{Binding BuildingImage}"
+                               Aspect="AspectFill"
+                               HeightRequest="250"
+                               HorizontalOptions="Fill" />
 
-                       <!-- Church Image -->  
-                       <Image Source="{Binding BuildingImage}"  
-                              Aspect="AspectFill"  
-                              HeightRequest="160"  
-                              HorizontalOptions="Fill" />  
+                        <!-- Church Details Card -->
+                        <VerticalStackLayout Spacing="12" Padding="20" BackgroundColor="White">
 
-                       <!-- Church Info -->  
-                       <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="20" />  
-                       <Label Text="{Binding Address}" FontSize="14" TextColor="Gray" />  
-                       <Label Text="{Binding Phone}" FontSize="14" TextColor="Gray" />  
+                            <!-- Church Name -->
+                            <Label Text="{Binding Name}"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="{DynamicResource PrimaryDarkText}" />
 
-                       <!-- Expand/Collapse Button -->  
-                       <Button Text="Show Activities"  
-                               Clicked="OnToggleActivitiesClicked"  
-                               CommandParameter="{Binding}"   
-                               FontSize="14"  
-                               Padding="5"  
-                               BackgroundColor="#e0e0e0"  
-                               CornerRadius="5"  
-                               />  
+                            <!-- Church Address - Clickable -->
+                            <!-- Clickable Address -->
+                            <!-- Clickable Phone -->
+                            <Button Text="{Binding Phone}"
+                                    TextColor="{DynamicResource PrimaryDarkText}"
+                                    BackgroundColor="Transparent"
+                                    Padding="0"
+                                    Clicked="OnDialPhoneClicked" />
 
-                       <!-- Collapsible Order of Activities -->  
-                       <Label x:Name="ActivitiesLabel"  
-                              Text="{Binding Activities}"  
-                              FontSize="13"  
-                              LineBreakMode="WordWrap"  
-                              IsVisible="{Binding ShowActivities}" />  
+                            <!-- Clickable Address -->
+                            <Button Text="{Binding Address}"
+                                    TextColor="{DynamicResource PrimaryDarkText}"
+                                    BackgroundColor="Transparent"
+                                    Padding="0"
+                                    Clicked="OnOpenMapClicked" />
 
-                   </VerticalStackLayout>  
-               </Border>  
 
-           </DataTemplate>  
-       </CollectionView.ItemTemplate>  
-   </CollectionView>  
+                            <!-- Activities Section -->
+                            <Label Text="Activities:"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="{DynamicResource PrimaryDarkText}" />
 
+                            <CollectionView ItemsSource="{Binding Activities}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Text="{Binding Name}"
+                                               TextColor="{DynamicResource PrimaryDarkText}"
+                                               FontSize="14">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:ChurchDetailsPage}}, Path=BindingContext.OpenActivityCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CoCDirectoryApp.Views.BlogPage"
+             Title="Blog">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="10">
+
+           
+            <Button Text="➕ Add New Blog"
+                    BackgroundColor="{DynamicResource Primary}"
+                    TextColor="White"
+                    CornerRadius="8"
+                    HeightRequest="45"
+                    Clicked="OnAddBlogClicked" />
+            
+            <!-- Blog Card -->
+            <Frame CornerRadius="10"
+                    HasShadow="True"
+                    BackgroundColor="{DynamicResource PageBackgroundColor}"
+                    Padding="12"
+                    Margin="10,6">
+
+                <!-- 2 rows: Title + Metadata -->
+                <Grid ColumnDefinitions="Auto,*"
+                        RowDefinitions="Auto,Auto"
+                        ColumnSpacing="12"
+                        HorizontalOptions="Fill">
+
+                    <!-- Icon -->
+                    <Image Source="abia_capital.jpg"
+                            WidthRequest="80"
+                            HeightRequest="80"
+                            Aspect="AspectFit"
+                            Grid.RowSpan="3"
+                            VerticalOptions="Start"
+                             HorizontalOptions="Center" />
+
+                    <!-- Title -->
+                    <Label Grid.Column="1"
+                           Grid.Row="0"
+                           Text="Sample Blog Post Title That Might Be Long"
+                           FontAttributes="Bold"
+                           FontSize="Medium"
+                           MaxLines="2"
+                           LineBreakMode="TailTruncation"
+                           TextColor="{DynamicResource PrimaryTextColor}" />
+
+                    <!-- Metadata row: * | Auto | Auto -->
+                    <Grid Grid.Column="1"
+                          Grid.Row="1"
+                          ColumnDefinitions="*,Auto,Auto"
+                          ColumnSpacing="12"
+                          VerticalOptions="End"
+                          HorizontalOptions="Fill"> 
+
+                        <!-- Posted by (flexible, truncates first) -->
+                        <Label Grid.Column="0"
+                               Text="Posted by Johnathan Doe the Third"
+                               FontSize="Small"
+                               MaxLines="1"
+                               LineBreakMode="TailTruncation"
+                               TextColor="{DynamicResource SecondaryTextColor}" />  
+
+                        <!-- Date (fixed, always visible) -->
+                        <Label Grid.Column="1"
+                               Text="Aug 15, 2025"
+                               FontSize="Small"
+                               MaxLines="1"
+                               LineBreakMode="NoWrap"
+                               TextColor="{DynamicResource SecondaryTextColor}" />  
+
+                        <!-- Views (icon + number, fixed, always visible) -->
+                        <HorizontalStackLayout Grid.Column="2"
+                                   Spacing="4"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="End">
+                            <Image Source="view.svg"
+                                   WidthRequest="14"
+                                   HeightRequest="14"
+                                   Aspect="AspectFit"
+                                   VerticalOptions="Center" />
+                                    <Label Text="123"
+                                   FontSize="Small"
+                                   MaxLines="1"
+                                   LineBreakMode="NoWrap"
+                                   TextColor="{DynamicResource SecondaryTextColor}" />  
+                        </HorizontalStackLayout>
+                    </Grid>
+                </Grid>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

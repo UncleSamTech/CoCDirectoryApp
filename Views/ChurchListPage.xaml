@@ -2,43 +2,71 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CoCDirectoryApp.Views.ChurchListPage"
-             Title="ChurchListPage">
-    <CollectionView ItemsSource="{Binding ChurchesList}"
-             SelectionMode="Single"
-             SelectionChanged="OnStateSelected">
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Border Stroke="Gray"
-                StrokeThickness="1"
-                BackgroundColor="White"
-                Padding="10"
-                Margin="5"
-                StrokeShape="RoundRectangle 8">
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:toolkitControls="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="Churches">
 
-                    <HorizontalStackLayout Spacing="10" Padding="5">
-                        <!-- Church Logo -->
-                        <Image Source="{Binding ChurchLoggo}"
-           WidthRequest="40"
-           HeightRequest="40"
-           Aspect="AspectFill"
-           VerticalOptions="Start" />
+    <VerticalStackLayout Padding="10">
+        <Button Text="➕ Add New Congregation"
+           BackgroundColor="{DynamicResource Primary}"
+           TextColor="White"
+           CornerRadius="8"
+           HeightRequest="45"
+           Clicked="OnAddCongregationClicked" />
+        <!-- Search Bar -->
+        <SearchBar Placeholder="Search churches..."
+                   TextChanged="OnSearchTextChanged" />
 
-                        <!-- Church Name + Phone -->
-                        <VerticalStackLayout Spacing="2" VerticalOptions="Center">
-                            <Label Text="{Binding ChurchName}"
-               FontSize="20"
-               FontAttributes="Bold" />
+        <!-- List -->
+        <CollectionView ItemsSource="{Binding FilteredChurchesList}"
+                        SelectionMode="Single"
+                        SelectionChanged="OnChurchSelected">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Stroke="Gray"
+                            StrokeThickness="1"
+                            BackgroundColor="{DynamicResource White}"
+                            Padding="10"
+                            Margin="5"
+                            StrokeShape="RoundRectangle 8">
 
-                            <Label Text="{Binding ChurchPhone}"
-               FontSize="12"
-               TextColor="Gray" />
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
+                        <Grid ColumnDefinitions="Auto,*,Auto"
+                              VerticalOptions="Center"
+                              Padding="5">
 
+                            <!-- Church Logo -->
+                            <Image Grid.Column="0"
+                                   Source="{Binding ChurchLoggo}"
+                                   WidthRequest="40"
+                                   HeightRequest="40"
+                                   Aspect="AspectFill"
+                                   VerticalOptions="Center" />
 
-                </Border>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+                            <!-- Church Name + Phone -->
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="2"
+                                                 VerticalOptions="Center"
+                                                 Padding="10,0">
+                                <Label Text="{Binding ChurchName}"
+                                       FontSize="20"
+                                       TextColor="{DynamicResource PrimaryDarkText}"
+                                       FontAttributes="Bold" />
+                                <Label Text="{Binding ChurchPhone}"
+                                       FontSize="12"
+                                       TextColor="{DynamicResource PrimaryDarkText}" />
+                            </VerticalStackLayout>
 
+                            <!-- Forward Arrow Icon -->
+                            <Image Grid.Column="2"
+                                   Source="fast_forward.png"
+                                   WidthRequest="20"
+                                   HeightRequest="20"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="End" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
 </ContentPage>

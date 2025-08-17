@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CoCDirectoryApp.Views.AddBlog"
+             Title="Add Blog"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Blog Title -->
+            <Label Text="Blog Title"
+                   FontSize="16"
+                   TextColor="{DynamicResource PrimaryTextColor}" />
+            <Entry x:Name="TitleEntry"
+                   Placeholder="Enter blog title"
+                   FontSize="14" />
+
+            <!-- Blog Content -->
+            <Label Text="Content"
+                   FontSize="16"
+                   TextColor="{DynamicResource PrimaryTextColor}" />
+            <Editor x:Name="ContentEditor"
+                    Placeholder="Write your blog here..."
+                    AutoSize="TextChanges"
+                    HeightRequest="200"
+                    FontSize="14" />
+
+            <!-- Media Upload -->
+            <Label Text="Add Media"
+                   FontSize="16"
+                   TextColor="{DynamicResource PrimaryTextColor}" />
+
+            <HorizontalStackLayout Spacing="15">
+                <Button Text="Add Image"
+                        x:Name="AddImageButton"
+                        Clicked="OnAddImageClicked" />
+
+                <Button Text="Add Video"
+                        x:Name="AddVideoButton"
+                        Clicked="OnAddVideoClicked" />
+
+                <Button Text="Add Audio"
+                        x:Name="AddAudioButton"
+                        Clicked="OnAddAudioClicked" />
+            </HorizontalStackLayout>
+
+            <!-- Media Preview (Optional) -->
+            <Image x:Name="SelectedImage"
+                   IsVisible="False"
+                   HeightRequest="150"
+                   Aspect="AspectFill" />
+
+            <!-- Publish Button -->
+            <Button Text="Publish Blog"
+                    x:Name="PublishButton"
+                    Clicked="OnPublishClicked"
+                    BackgroundColor="{DynamicResource Primary}"
+                    TextColor="White"
+                    CornerRadius="8"
+                    HeightRequest="50"
+                    VerticalOptions="End" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

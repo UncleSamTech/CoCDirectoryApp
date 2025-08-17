@@ -5,7 +5,8 @@ public partial class SignupPage : ContentPage
 	public SignupPage()
 	{
 		InitializeComponent();
-	}
+        Shell.SetFlyoutBehavior(this, FlyoutBehavior.Disabled);
+    }
 
     private void OnPasswordTextChanged(object sender, TextChangedEventArgs e)
     {
@@ -59,6 +60,27 @@ public partial class SignupPage : ContentPage
     {
         // Simulate or initiate Twitter login
         DisplayAlert("Sigup", "Twitter signup clicked", "OK");
+    }
+
+   
+
+    private async void OnReturnLogin(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//LoginPage");
+    }
+
+    private async void OnSignUpClicked(object sender, EventArgs e)
+    {
+        string username = UsernameEntry.Text;
+        string password = PasswordEntry.Text;
+
+        if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+        {
+            await DisplayAlert("Error", "Username and password cannot be empty.", "OK");
+            return;
+        }
+        await DisplayAlert("Signup", "Signup successful", "OK");
+        await Shell.Current.GoToAsync("//LoginPage");
     }
 
 }
